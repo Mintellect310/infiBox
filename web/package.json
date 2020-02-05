@@ -1,0 +1,42 @@
+{
+  "name": "web",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "bootstrap": "^4.4.1",
+    "create-react-app": "^3.3.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "react": "^16.12.0",
+    "react-bootstrap": "^1.0.0-beta.16",
+    "react-dom": "^16.12.0",
+    "react-responsive-menubar": "^1.0.1",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "^3.3.0",
+    "reactstrap": "^8.4.0"
+  },
+  "devDependencies": {
+    "html-webpack-plugin": "^3.2.0",
+    "webpack": "^2.7.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "eject": "react-scripts eject"
+  },
+  "author": "",
+  "license": "ISC",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "description": ""
+}
