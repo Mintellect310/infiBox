@@ -7,7 +7,8 @@ import {Signup} from "./auth/Signup"
 import {Login} from "./auth/Login"
 import {ProductCard} from './ShopPage/ProductCard'
 import {Shop} from './ShopPage/Shop'
-
+import './App.css'
+import {Cart} from './cart/Cart'
 
 
 class App extends Component {
@@ -29,6 +30,7 @@ class App extends Component {
                 <Route path="/shop" exact component={Shop} />
                 <Route path="/signin" exact component={Login} />
                 <Route path="/signup" exact component={Signup} />
+                <Route path='/cart' exact component={Cart}/>
             </Switch>
         </BrowserRouter>
         )

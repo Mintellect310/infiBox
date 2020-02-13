@@ -1,7 +1,6 @@
 import React , {Component,Fragment} from 'react'
 import {Card , CardColumns, Grid} from 'react-bootstrap'
 import {ProductCard} from './ProductCard'
-import ReactDOM from "react-dom";
 import {NavLink} from 'react-router-dom';
 import {Navbar, Nav, Row, Col, Container} from 'react-bootstrap';
 import {Form, FormGroup, Button, Label, Input} from 'reactstrap'
@@ -22,26 +21,25 @@ export class Shop extends Component {
 	}
 
    render(){
-   
-   	const product={name:'Hello', price:'28'}
+
    	return(
-   		<Fragment>
+   		<Fragment >
    		   	<Container>
    				 <Row>
  				  		 <Col sm={2}>
- 				  		 	<h3>Filters</h3>
- 				  		 	<Filters to_parent={this.callback}/>
+ 				  		 	<h5>Filters</h5>
+ 				  		 	<Filters to_parent={this.callback} key={1}/>
  				  		 </Col>
    						 <Col sm={8}>
-   						 	<h3>Shop</h3>
+   						 	<h4>Shop</h4>
    						 	<hr/>
                         
                        <Row>
-                       <CardColumns>
+                       <CardColumns >
                         {this.state.finaldata.map((product, i)=>(
                                
-                                 <Col xs={6} md={4}>
-                                 <ProductCard item={product}/>
+                                 <Col md={3}>
+                                 <ProductCard item={product} key={i}/>
                                  </Col>
                          
                           

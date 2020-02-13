@@ -158,7 +158,7 @@ export class Filters extends Component {
    	return(
          <Fragment>
          <hr/>
-            <h5>Prices</h5>
+            <h6>Prices</h6>
               {this.state.prices.map((p, index) => {
                                             return (
                                                 <div className="mr-2 ml-4" key={index}>
@@ -170,7 +170,7 @@ export class Filters extends Component {
                        })} 
 
                        <br/>
-             <h5>Categories</h5>              
+             <h6>Categories</h6>              
                  {this.state.categories.map((category, index) => {
                                             return (
                                                 <div className="form-check pgs-filter-checkbox" key={index}>
