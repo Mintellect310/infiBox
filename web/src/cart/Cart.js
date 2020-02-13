@@ -15,6 +15,7 @@ export class Cart extends Component{
             }
 
       this.productupdate= this.productupdate.bind(this)
+      this.getTotal = this.getTotal.bind(this)
     }
 
     productupdate = () => {
@@ -33,6 +34,16 @@ export class Cart extends Component{
     this.setState({ items: items });
     };
 
+    getTotal = () => {
+      return this.state.items.reduce((currentValue, nextValue)=> {
+        return currentValue + (nextValue.count)*(nextValue.price)
+      }, 0);
+    }
+
+    componentDidUpdate(){
+      this.getTotal();
+    }
+
  render(){
    	return(
    		<Fragment>
@@ -48,7 +59,7 @@ export class Cart extends Component{
    						 <Col >
    						 	<h5>Cart Summary</h5>
    						 	<hr/>
-   						 	   <Checkout products={this.state.items}/>
+   						 	   <Checkout total={this.getTotal()} products={this.state.items}/>
    						 </Col>
  				    </Row>
 			   </Container>

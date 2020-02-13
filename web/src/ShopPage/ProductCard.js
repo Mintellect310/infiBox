@@ -26,7 +26,7 @@ export class ProductCard extends Component {
   <Card.Body>
     <Card.Title>{this.props.item.name}</Card.Title>
     <Card.Text inline>
-    	${this.props.item.price}
+    	₹{this.props.item.price}
     </Card.Text>
     <Button onClick={this.addToCart} variant="primary">Add to cart</Button>
     <Button variant="primary">View cart</Button>

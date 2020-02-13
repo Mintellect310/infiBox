@@ -12,22 +12,21 @@ export class Checkout extends Component {
             this.state={
                 
             }
-       this.getTotal = this.getTotal.bind(this)
+       
     }
+    componentWillReceiveProps(){
 
-    getTotal = () => {
-    	return this.props.products.reduce((currentValue, nextValue)=> {
-    		return currentValue + nextValue.count*nextValue.price
-    	}, 0);
     }
+    
+    
 
     render(){
     
         return(
         	<Fragment>
-			<h5>Total : ${this.getTotal()}</h5>           
+			<h5>Total : ₹{this.props.total}</h5>           
        		{isAuthenticated() ? (
-       				<Button variant="success">Checkout</Button>
+       				<Button variant="success">Check out</Button>
 
        				):
        				

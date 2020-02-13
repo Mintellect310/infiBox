@@ -46,7 +46,7 @@ export class CartCard extends Component {
        updateItem(this.props.item._id, this.state.count)
     }
    
-   deletenow=()=>{
+    deletenow=()=>{
       this.props.onDelete(this.props.item._id);
       removeItem(this.props.item._id)
    }
@@ -64,7 +64,7 @@ export class CartCard extends Component {
 
             <Col> 
             <h6>{this.props.item.name}</h6>
-            <p>{this.props.item.price}</p>
+            <p>₹{this.props.item.price}</p>
             {(this.showCartUpdateOptions(this.props.cartUpdate)) && 
                 <Row>
                 <Col>
