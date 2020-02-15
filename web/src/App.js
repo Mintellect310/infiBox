@@ -9,6 +9,8 @@ import {ProductCard} from './ShopPage/ProductCard'
 import {Shop} from './ShopPage/Shop'
 import './App.css'
 import {Cart} from './cart/Cart'
+import {Profile} from './Profile/Profile'
+import PrivateRoute from './PrivateRoute'
 
 
 class App extends Component {
@@ -31,6 +33,7 @@ class App extends Component {
                 <Route path="/signin" exact component={Login} />
                 <Route path="/signup" exact component={Signup} />
                 <Route path='/cart' exact component={Cart}/>
+                <PrivateRoute path='/profile' exact component={Profile}/>
             </Switch>
         </BrowserRouter>
         )

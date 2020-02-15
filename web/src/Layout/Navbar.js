@@ -25,8 +25,10 @@ export class Navigation extends Component{
       <Nav.Link className="d-inline-p-2 bg-dark text-white" href="/signin">Login</Nav.Link>
         </Fragment>
         :
-
+        <Fragment>
       <Nav.Link className="d-inline-p-2 bg-dark text-white" onClick={() => signout(()=>{})} href="/">Logout</Nav.Link>
+      <Nav.Link className="d-inline-p-2 bg-dark text-white" href="/profile">Profile</Nav.Link>
+      </Fragment>
       }
       
     </Nav>
