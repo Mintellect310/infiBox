@@ -11,6 +11,7 @@ import './App.css'
 import {Cart} from './cart/Cart'
 import {Profile} from './Profile/Profile'
 import PrivateRoute from './PrivateRoute'
+<<<<<<< HEAD
 import AdminRoute from './AdminRoute'
 import PublicRoute from './PublicRoute'
 import {Admin} from './Admin/index'
@@ -18,6 +19,9 @@ import {Example} from './Admin/Example'
 import {ProductAdd} from './Admin/ProductAdd'
 import {ShopAdd} from './Admin/ShopAdd'
 import {Search} from './ShopPage/Search'
+=======
+import {Terms} from './Terms/Terms'
+>>>>>>> d68c24e03c54f4763f138adaa47e9baf274bc6ed
 
 class App extends Component {
     render() {
@@ -29,6 +33,7 @@ class App extends Component {
              
          
             <Switch>
+<<<<<<< HEAD
                 <PublicRoute path="/" exact component={Shop} />
 
                 
@@ -36,6 +41,13 @@ class App extends Component {
                 <PublicRoute path="/signin" exact component={Login} />
                 <PublicRoute path="/signup" exact component={Signup} />
                 <PublicRoute path='/cart' exact component={Cart}/>
+=======
+                <Route path="/shop" exact component={Shop} />
+                <Route path="/signin" exact component={Login} />
+                <Route path="/signup" exact component={Signup} />
+                <Route path='/cart' exact component={Cart}/>
+                <Route path="/terms" exact component={Terms}/>
+>>>>>>> d68c24e03c54f4763f138adaa47e9baf274bc6ed
                 <PrivateRoute path='/profile' exact component={Profile}/>
                 <Route path='/admin' exact component={Admin}/>
                 <Route path='/admin' exact component={Admin}/>
