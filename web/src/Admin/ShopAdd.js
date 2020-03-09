@@ -41,7 +41,7 @@ export class ShopAdd extends Component {
   			     </Container>
    				 <Button variant="primary">Enter</Button>
  				 </Card.Body>
- 			 <Card.Footer className="text-muted">Terms and services</Card.Footer>
+ 			 <Card.Footer className="text-muted"><a href="/terms">Terms and services</a></Card.Footer>
 			</Card>
 			</Container>
 			</div>

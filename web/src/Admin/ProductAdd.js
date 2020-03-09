@@ -1,12 +1,11 @@
 import React,{Component, Fragment} from 'react';
 import {Button, Label, Input, FormText} from 'reactstrap'
-import {Card, FormGroup,Container, Form, Col, Row, InputGroup} from 'react-bootstrap'
-import { Formik, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
+import {Card, FormGroup,Container, Form, Col, Row, InputGroup, Modal} from 'react-bootstrap'
 import {authenticate, isAuthenticated} from '../auth/authapi'
 import '../auth/form.css'
 import axios from 'axios';
 import {Navad} from './Nav_admin'
+import background from './grocery-store.jpg'
 
 const formData = new FormData();
 
@@ -27,9 +26,11 @@ export class ProductAdd extends Component{
                 sold: 20,
                 image:null, 
                 validated:false, 
-                cvalidate:false,        
+                cvalidate:false,
+                shopname:'',
+                modalShow:false        
        			 }
-       			}
+          }
 
       namechange= event => {
         this.setState({
@@ -37,8 +38,12 @@ export class ProductAdd extends Component{
                     name: event.target.value,error:false
                 });       
       }
+      shopnamechange = event => {
+        this.setState({...this.state.shopname,
+                        shopname: event.target.value, error:false})
+      }
       cnamechange= event => {
-      this.setState({
+        this.setState({
                     ...this.state.cname,
                     cname: event.target.value,error:false
                 });       
@@ -78,7 +83,7 @@ export class ProductAdd extends Component{
         
          fetch(`http://localhost:8000/api/category/${categoryId}`, {
         method: 'GET'
-    })
+        })
         .then(response => {
             return response.json();
         })
@@ -110,14 +115,14 @@ export class ProductAdd extends Component{
         });
 
     }
-   
+    // componentDidUpdate(){
+    //   this.fetchcategory()
+    // }
     componentWillMount(){
 
           this.fetchcategory()
     }
-    componentDidUpdate(){
-         // this.fetchcategory()
-    }
+
   
    // componentDidUpdate(){
    //               fetch('http://localhost:8000/api/categories', {
@@ -185,13 +190,13 @@ export class ProductAdd extends Component{
      this.setState({error:data.error,
                  success:false});
            } else{
-                this.setState({
-                   ...this.state.cname,
-                   cname: ''
-               }); 
-                 this.setState({
-                   error: ''
-               });
+              //   this.setState({
+              //      ...this.state.cname,
+              //      cname: ''
+              //  }); 
+              //    this.setState({
+              //      error: ''
+              //  });
             this.setState({
                    success : true
             });
@@ -245,13 +250,15 @@ export class ProductAdd extends Component{
  render(){
     const {user: {_id,name,email,role}}= isAuthenticated();
         return(
-
+  <div>
   <Fragment>
   <Navad/>
   <Container>
-   <Row>
-     <Col sm={5}>
-        <Card>
+    {/* <h3>Add a Product</h3>
+    <h4>Give me some details about the product</h4> */}
+  <Row>
+      <Col sm={5}>
+        <Card style={{width:'60rem'}}>
   <Card.Header as="h5">Add a Product</Card.Header>
   <Card.Body>
      <Card.Title>Give some details about the product.</Card.Title>
@@ -259,6 +266,8 @@ export class ProductAdd extends Component{
     <Card.Text>
           <Form noValidate validated={this.state.validated} onSubmit={this.clicksubmitproduct}>
     
+    <Row>
+      <Col>
         <Form.Group as={Col} controlId="validationCustom01">
           <Form.Label>Name</Form.Label>
           <Form.Control
@@ -271,6 +280,8 @@ export class ProductAdd extends Component{
           />
           <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         </Form.Group>
+      </Col>
+      <Col>
         <Form.Group as={Col}  controlId="validationCustom02">
           <Form.Label>Price</Form.Label>
           <Form.Control
@@ -282,40 +293,15 @@ export class ProductAdd extends Component{
             defaultValue=""
           />
         </Form.Group>
-        
+      </Col>
+    </Row>  
         <Form.Group as={Col} controlId="exampleForm.ControlTextarea1">
             <Form.Label>Description</Form.Label>
-            <Form.Control required as="textarea" rows="3" value={this.state.description} onChange={this.descriptionchange} />
+            <Form.Control required as="textarea" rows="3" value={this.state.description} onChange={this.descriptionchange} placeholder="Describe your product in few words"/>
             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         </Form.Group>
-        
-      <Form.Group as={Col} controlId="exampleForm.ControlTextarea1">
-        <Form.Label>Image</Form.Label>
-         <Form.Control
-            required
-            type="file"
-            name="photo"
-            onChange = {this.imagechange}
-            placeholder="Image"
-          
-            defaultValue=""
-          />        
-          <FormText color="muted">
-          Image must be a size of less than 1mb.
-          </FormText>
-      </Form.Group>
-
-        <Form.Group as={Col} controlId="validationCustom02">
-          <Form.Label>Quantity</Form.Label>
-          <Form.Control
-            required
-            type="number"
-            onChange = {this.quantitychange}
-            placeholder="Quantity"
-            value={this.state.quantity}
-            defaultValue=""
-          />
-        </Form.Group>
+    <Row>   
+      <Col> 
         <Form.Group as={Col} controlId="formGridState">
           <Form.Label>Category</Form.Label>
           <Form.Control as="select" onChange={this.categorychange}>
@@ -328,32 +314,40 @@ export class ProductAdd extends Component{
                       ))}      
           </Form.Control>
         </Form.Group>
-      
-      <Form.Group>
-        <Form.Check
-          required
-          label="Agree to terms and conditions"
-          feedback="Check mark!"
-        />
-      </Form.Group>
-      <Button type="submit">Submit</Button>
-    </Form>
-
-   </Card.Text>
-    
-  </Card.Body>
- </Card>
-</Col>
-<Card>
- <Card.Header as="h5">Add a Category</Card.Header>
-  <Card.Body>
-     <Card.Title>Didn't find a category for your product? <br/><hr/> Create a category here.</Card.Title>
-    <hr/>
-      <Card.Text>
-    <Col>
+      </Col>
+      <Col>
+        <Form.Group as={Col} controlId="validationCustom02">
+          <Form.Label>Quantity</Form.Label>
+          <Form.Control
+            required
+            type="number"
+            onChange = {this.quantitychange}
+            placeholder="Quantity"
+            value={this.state.quantity}
+            defaultValue=""
+          />
+        </Form.Group>
+      </Col>
+      </Row>     
+      {
+      this.state.modalShow && 
+      <Modal
+      show={this.state.modalShow}
+      onHide={() => this.setState({modalShow:false})}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          Add a category
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <h4 align="center">Create a category here</h4>
+        <br/>
         <Form noValidate validated={this.state.cvalidate} onSubmit={this.clicksubmit}>
-        <Form.Group as={Col} controlId="validationCustom01">
-          <Form.Label>Category Name</Form.Label>
+        <Form.Group controlId="validationCustom01">
           <Form.Control
             required
             type="text"
@@ -368,22 +362,52 @@ export class ProductAdd extends Component{
         </Form.Group>
          <Button type="submit">Submit</Button>
         </Form>
-        </Col>
+      </Modal.Body> 
+    </Modal>
+        
+        }
+    <a>🤔 Couldn't categorize your product?  </a>
+    <Button className="but" onClick={() => this.setState({modalShow:true})}>
+        <u>Click Here</u>
+      </Button>
+        <br/><br/>
 
-     </Card.Text>
+        <Form.Group as={Col} controlId="exampleForm.ControlTextarea1">
+        <Form.Label>Image</Form.Label>
+         <Form.Control
+            required
+            type="file"
+            name="photo"
+            onChange = {this.imagechange}
+            placeholder="Image"
+          
+            defaultValue=""
+          />        
+          <FormText color="muted">
+          Image must be a size of less than 1mb.
+          </FormText>
+      </Form.Group>
+      
+      <Form.Group>
+        <Form.Check
+          required
+          label="Agree to terms and conditions"
+          feedback="Check mark!"
+        />
+      </Form.Group>
+      <hr/>
+      <Button type="submit">Submit</Button>
+    </Form>
+
+   </Card.Text>
     
   </Card.Body>
- </Card>   
+ </Card>
+</Col>
         </Row>
         </Container>
         </Fragment>
-
+        </div>
        )
-
     }
   }
-
-
-
-
-
