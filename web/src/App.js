@@ -11,8 +11,6 @@ import './App.css'
 import {Cart} from './cart/Cart'
 import {Profile} from './Profile/Profile'
 import PrivateRoute from './PrivateRoute'
-<<<<<<< HEAD
-<<<<<<< HEAD
 import AdminRoute from './AdminRoute'
 import PublicRoute from './PublicRoute'
 import {Admin} from './Admin/index'
