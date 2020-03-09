@@ -25,6 +25,11 @@ const productSchema = new mongoose.Schema(
             ref: "Category",
             required: true
         },
+        shop: {
+            type: ObjectId,
+            ref: "Shop",
+            required: true
+        },
         quantity: {
             type: Number
         },

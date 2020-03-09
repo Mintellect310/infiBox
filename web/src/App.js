@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {Component, Fragment} from "react";
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Navbar from "./Layout/Navbar";
 import {Navigation} from "./Layout/Navbar";
@@ -11,31 +11,44 @@ import './App.css'
 import {Cart} from './cart/Cart'
 import {Profile} from './Profile/Profile'
 import PrivateRoute from './PrivateRoute'
-
+import AdminRoute from './AdminRoute'
+import PublicRoute from './PublicRoute'
+import {Admin} from './Admin/index'
+import {Example} from './Admin/Example'
+import {ProductAdd} from './Admin/ProductAdd'
+import {ShopAdd} from './Admin/ShopAdd'
+import {Search} from './ShopPage/Search'
 
 class App extends Component {
     render() {
         const hello = {name: 'mahesh'}
         return (
-    
-             <BrowserRouter>
-             <div className="App">
-                <Navigation/>
-                <Header/>
+ 
+            <BrowserRouter>
 
-            <main style={{marginTop:'64px'}}>
-            </main>
-           
-            </div>
+             
          
             <Switch>
-                <Route path="/shop" exact component={Shop} />
-                <Route path="/signin" exact component={Login} />
-                <Route path="/signup" exact component={Signup} />
-                <Route path='/cart' exact component={Cart}/>
+                <PublicRoute path="/" exact component={Shop} />
+
+                
+                <PublicRoute path="/shop" exact component={Shop} />
+                <PublicRoute path="/signin" exact component={Login} />
+                <PublicRoute path="/signup" exact component={Signup} />
+                <PublicRoute path='/cart' exact component={Cart}/>
                 <PrivateRoute path='/profile' exact component={Profile}/>
+                <Route path='/admin' exact component={Admin}/>
+                <Route path='/admin' exact component={Admin}/>
+                <Route path='/shopadd' exact component={ShopAdd}/>
+
+                <Route path="/example" exact component={Example}/>
+                <Route path="/productadd" exact component={ProductAdd}/>
+                <Route path="/search" exact component={Search}/>
+                
+
             </Switch>
         </BrowserRouter>
+       
         )
     }
 }

@@ -97,3 +97,12 @@ exports.isAdmin = (req, res, next) => {
     next();
 };
 
+exports.isOwner = (req,res, next) => {
+    if(req.profile.role === 0 || req.profile.role === 1) {
+        return res.status(403).json({
+            error : 'You do not have access!'
+        })
+    }
+    next();
+};
+

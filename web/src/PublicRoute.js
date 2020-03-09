@@ -5,8 +5,8 @@ import Navbar from "./Layout/Navbar";
 import {Navigation} from "./Layout/Navbar";
 import {Header} from "./Layout/Header";
 
-const PrivateRoute = ({component : Component, ...rest}) => (
-        <Route {...rest} render={props => isAuthenticated() ? (
+const PublicRoute = ({component : Component, ...rest}) => (
+        <Route {...rest} render={props => '1' ? (
 <div>
              <div className="App">
                 <Navigation/>
@@ -24,4 +24,4 @@ const PrivateRoute = ({component : Component, ...rest}) => (
 ) } />
 );
 
-export default PrivateRoute;
+export default PublicRoute;

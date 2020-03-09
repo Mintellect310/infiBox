@@ -7,32 +7,32 @@ import {Form, FormGroup, Button, Label, Input} from 'reactstrap'
 import {Filters} from './Filters'
 
 export class Shop extends Component { 
-	constructor(props){
-	    super(props)
-		this.state={
-			finaldata:[]
-		}
-		
-	}
+   constructor(props){
+       super(props)
+      this.state={
+         finaldata:[]
+      }
+      
+   }
 
 
-	callback = (pulleddata) =>{
-			this.setState({finaldata:pulleddata})
-	}
+   callback = (pulleddata) =>{
+         this.setState({finaldata:pulleddata})
+   }
 
    render(){
 
-   	return(
-   		<Fragment >
-   		   	<Container>
-   				 <Row>
- 				  		 <Col sm={2}>
- 				  		 	<h5>Filters</h5>
- 				  		 	<Filters to_parent={this.callback} key={1}/>
- 				  		 </Col>
-   						 <Col sm={8}>
-   						 	<h4>Shop</h4>
-   						 	<hr/>
+      return(
+         <Fragment >
+               <Container>
+                <Row>
+                   <Col sm={2}>
+                     <h5>Filters</h5>
+                     <Filters to_parent={this.callback} key={1}/>
+                     </Col>
+                      <Col sm={8}>
+                        <h4>Shop</h4>
+                        <hr/>
                         
                        <Row>
                        <CardColumns >
@@ -45,14 +45,14 @@ export class Shop extends Component {
                           
                            ))}
                            </CardColumns>
-   						   </Row>
+                        </Row>
 
-   						 </Col>
- 				    </Row>
-			   </Container>
-   		</Fragment>
+                      </Col>
+                </Row>
+            </Container>
+         </Fragment>
 
-   		)
+         )
    }
  
 }

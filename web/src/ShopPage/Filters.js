@@ -3,13 +3,13 @@ import {ProductCard} from './ProductCard'
 import {NavLink} from 'react-router-dom';
 import {Navbar, Nav, Row, Col, Container} from 'react-bootstrap';
 import {Form, FormGroup, Button, Label, Input} from 'reactstrap'
-
+import axios from "axios"
 
 
 export class Filters extends Component { 
-	constructor(props){
-	    super(props)
-		this.state={
+  constructor(props){
+      super(props)
+    this.state={
             categories:[],
             error:'',
             checked: [],
@@ -33,17 +33,20 @@ export class Filters extends Component {
             
             ],
             myFilters : { filters : { category :[], price: []}}
-		}
+    }
 
         this.handletoggle = this.handletoggle.bind(this);
         this.handleFilters = this.handleFilters.bind(this);
         this.handlechange = this.handlechange.bind(this);
         this.handlePrice = this.handlePrice.bind(this);
         this.loadFilteredResults = this.loadFilteredResults.bind(this);
-	}
+      
+  }
 
 
-    componentWillMount(){
+    
+
+    fetchcategory = () => {
 
           fetch('http://localhost:8000/api/categories', {
         method: 'GET',
@@ -61,18 +64,22 @@ export class Filters extends Component {
                 this.setState({ error: data.error });
             } else {
                 this.setState({
-                    categories: data
+                    categories: data,
+                
                 });
             }
         });
 
-          this.loadFilteredResults(this.state.myFilters.filters)
+        this.loadFilteredResults(this.state.myFilters.filters)
 
-          
+
     }
+   
+    componentWillMount(){
 
-
-      
+          this.fetchcategory()
+    }
+        
     handlePrice = value =>{
         const data = this.state.prices;
         let array=[]
@@ -115,21 +122,22 @@ export class Filters extends Component {
             'Content-type': 'application/json',
         },
         body: JSON.stringify({limit:this.state.limit, skip: this.state.skip , filters: newFilters})
-    })
+        })
         .then(response => {
+          
             return response.json();
         })
         .catch(err => console.log(err))
         .then(data=>{
             console.log(data)
                 this.setState({filteredResults : data.data})
+
                 this.pushdata();
 
             }
         )
     }
-    
-  
+
 
         
 
@@ -154,9 +162,10 @@ export class Filters extends Component {
     }
 
    render(){
-   	const hello={name:'Hello'}
-   	return(
+    const hello={name:'Hello'}
+    return(
          <Fragment>
+         <Container>        
          <hr/>
             <h6>Prices</h6>
               {this.state.prices.map((p, index) => {
@@ -168,6 +177,7 @@ export class Filters extends Component {
                                                 </div>
                               )
                        })} 
+
 
                        <br/>
              <h6>Categories</h6>              
@@ -181,9 +191,8 @@ export class Filters extends Component {
                                                            )
                             })}
                    <hr/>
-
-
-         </Fragment>
-		)}
+         </Container>         
+      </Fragment>
+    )}
  
 }
